@@ -112,11 +112,9 @@ public class AStar<A,S,C extends Comparable<C>,N extends HeuristicNode<A,S,C,N>>
             // Analyze the cost of each movement from the current node
             for(N successorNode : expander.expand(current)){
                 N successorOpen = open.get(successorNode.state());
-                if (successorOpen != null) {
-                    if (successorOpen.getScore().compareTo(successorNode.getScore()) <= 0) {
-                        // Keep analyzing the other movements, discard this movement
-                        continue;
-                    }
+                if (successorOpen != null && successorOpen.getScore().compareTo(successorNode.getScore()) <= 0) {
+                    // Keep analyzing the other movements, discard this movement
+                    continue;
                 }
 
                 N successorClose = closed.get(successorNode.state());
