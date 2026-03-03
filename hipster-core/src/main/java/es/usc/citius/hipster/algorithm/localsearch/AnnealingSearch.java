@@ -108,6 +108,7 @@ public class AnnealingSearch<A, S, N extends HeuristicNode<A, S, Double, N>> ext
 		} else {
 			// default implementation of the successor: picks up a successor
 			// randomly
+			Random randIndGen = new Random();
 			this.successorFinder = new SuccessorFinder<A, S, N>() {
 				@Override
 				public N estimate(N node, NodeExpander<A, S, N> nodeExpander) {
@@ -116,7 +117,6 @@ public class AnnealingSearch<A, S, N extends HeuristicNode<A, S, Double, N>> ext
 					for (N successor : nodeExpander.expand(node)) {
 						successors.add(successor);
 					}
-					Random randIndGen = new Random();
 					return successors.get(Math.abs(randIndGen.nextInt()) % successors.size());
 				}
 			};
